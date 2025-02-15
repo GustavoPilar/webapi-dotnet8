@@ -20,7 +20,7 @@ namespace APICatalogo.Controllers
         [HttpGet]
         public ActionResult<IEnumerable<Categoria>> Get()
         {
-            var categorias = _context.Categorias.AsNoTracking().ToList();
+            var categorias = _context.Categorias?.AsNoTracking().ToList();
 
             if (categorias is null) return NotFound("Nenhuma categoria encontrada");
 
@@ -30,7 +30,7 @@ namespace APICatalogo.Controllers
         [HttpGet("{id:int}", Name="ObterCategoria")]
         public ActionResult<Categoria> GetById(int id)
         {
-            var categoria = _context.Categorias.AsNoTracking().FirstOrDefault<Categoria>(c => c.Id == id);
+            var categoria = _context.Categorias?.AsNoTracking().FirstOrDefault<Categoria>(c => c.Id == id);
 
             if (categoria is null) return NotFound("Categoria não encontrada");
 
@@ -40,7 +40,16 @@ namespace APICatalogo.Controllers
         [HttpGet("{id:int}/Produtos")]
         public ActionResult<IEnumerable<Categoria>> GetProdutosByCategorias(int id)
         {
-            return _context.Categorias.Include(p => p.Produtos).Where(c => c.Id == id).AsNoTracking().ToList();
+            try
+            {
+                return _context.Categorias!.Include(p => p.Produtos).Where(c => c.Id == id).AsNoTracking().ToList();
+            }
+            catch (Exception)
+            {
+
+                return StatusCode(StatusCodes.Status500InternalServerError, "Ocorreu um erro ao tratar a sua requisição.");
+            }
+
         }
 
         [HttpPost]
@@ -48,7 +57,7 @@ namespace APICatalogo.Controllers
         {
             if (categoria is null) return BadRequest("Entidade inválida. Verifique e tente novamente.");
 
-            _context.Categorias.Add(categoria);
+            _context.Categorias!.Add(categoria);
             _context.SaveChanges();
 
             return new CreatedAtRouteResult("ObterCategoria", new { id = categoria.Id }, categoria);
@@ -68,11 +77,11 @@ namespace APICatalogo.Controllers
         [HttpDelete("{id:int}")]
         public ActionResult Delete(int id)
         {
-            var categoria = _context.Categorias.FirstOrDefault(c => c.Id == id);
+            var categoria = _context.Categorias?.FirstOrDefault(c => c.Id == id);
 
             if (categoria is null) return BadRequest("Categoria não encontrada. Verifique e tente novamente");
 
-            _context.Categorias.Remove(categoria);
+            _context.Categorias!.Remove(categoria);
             _context.SaveChanges();
 
             return Ok(categoria);
