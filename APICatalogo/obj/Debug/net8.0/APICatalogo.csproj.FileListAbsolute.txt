@@ -111,3 +111,7 @@ C:\Users\Gustavo Pilar\Documents\cursosUdemy\aspNetCore8\APICatalogo\APICatalogo
 C:\Users\Gustavo Pilar\Documents\cursosUdemy\aspNetCore8\APICatalogo\APICatalogo\obj\Debug\net8.0\APICatalogo.pdb
 C:\Users\Gustavo Pilar\Documents\cursosUdemy\aspNetCore8\APICatalogo\APICatalogo\obj\Debug\net8.0\APICatalogo.genruntimeconfig.cache
 C:\Users\Gustavo Pilar\Documents\cursosUdemy\aspNetCore8\APICatalogo\APICatalogo\obj\Debug\net8.0\ref\APICatalogo.dll
+C:\Users\Gustavo Pilar\Documents\cursosUdemy\aspNetCore8\APICatalogo\APICatalogo\bin\Debug\net8.0\APICatalogo.staticwebassets.endpoints.json
+C:\Users\Gustavo Pilar\Documents\cursosUdemy\aspNetCore8\APICatalogo\APICatalogo\obj\Debug\net8.0\staticwebassets.build.endpoints.json
+C:\Users\Gustavo Pilar\Documents\cursosUdemy\aspNetCore8\APICatalogo\APICatalogo\obj\Debug\net8.0\staticwebassets\msbuild.APICatalogo.Microsoft.AspNetCore.StaticWebAssetEndpoints.props
+C:\Users\Gustavo Pilar\Documents\cursosUdemy\aspNetCore8\APICatalogo\APICatalogo\obj\Debug\net8.0\staticwebassets.upToDateCheck.txt

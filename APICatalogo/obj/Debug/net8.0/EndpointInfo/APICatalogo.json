@@ -5,12 +5,11 @@
     "version": "1.0"
   },
   "paths": {
-    "/WeatherForecast": {
+    "/Produtos": {
       "get": {
         "tags": [
-          "WeatherForecast"
+          "Produtos"
         ],
-        "operationId": "GetWeatherForecast",
         "responses": {
           "200": {
             "description": "OK",
@@ -19,7 +18,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/WeatherForecast"
+                    "$ref": "#/components/schemas/Produto"
                   }
                 }
               },
@@ -27,7 +26,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/WeatherForecast"
+                    "$ref": "#/components/schemas/Produto"
                   }
                 }
               },
@@ -35,7 +34,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/WeatherForecast"
+                    "$ref": "#/components/schemas/Produto"
                   }
                 }
               }
@@ -47,25 +46,85 @@
   },
   "components": {
     "schemas": {
-      "WeatherForecast": {
+      "Categoria": {
+        "required": [
+          "imagemUrl",
+          "nome",
+          "produtos"
+        ],
         "type": "object",
         "properties": {
-          "date": {
-            "type": "string",
-            "format": "date"
-          },
-          "temperatureC": {
+          "id": {
             "type": "integer",
             "format": "int32"
           },
-          "temperatureF": {
-            "type": "integer",
-            "format": "int32",
-            "readOnly": true
+          "nome": {
+            "maxLength": 80,
+            "minLength": 0,
+            "type": "string"
           },
-          "summary": {
+          "imagemUrl": {
+            "maxLength": 80,
+            "minLength": 0,
+            "type": "string"
+          },
+          "produtos": {
+            "maxLength": 300,
+            "minLength": 0,
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Produto"
+            }
+          }
+        },
+        "additionalProperties": false
+      },
+      "Produto": {
+        "required": [
+          "descricao",
+          "imagemUrl",
+          "nome",
+          "preco"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "nome": {
+            "maxLength": 80,
+            "minLength": 0,
+            "type": "string"
+          },
+          "descricao": {
+            "maxLength": 300,
+            "minLength": 0,
+            "type": "string"
+          },
+          "preco": {
+            "type": "number",
+            "format": "double"
+          },
+          "imagemUrl": {
+            "maxLength": 300,
+            "minLength": 0,
+            "type": "string"
+          },
+          "estoque": {
+            "type": "number",
+            "format": "float"
+          },
+          "dataCadastro": {
             "type": "string",
-            "nullable": true
+            "format": "date-time"
+          },
+          "categoriaId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "categoria": {
+            "$ref": "#/components/schemas/Categoria"
           }
         },
         "additionalProperties": false
