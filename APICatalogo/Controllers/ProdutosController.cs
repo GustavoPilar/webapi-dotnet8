@@ -28,7 +28,7 @@ namespace APICatalogo.Controllers
             return produtos;
         }
 
-        [HttpGet("{id:int}")]
+        [HttpGet("{id:int}", Name="ObterProduto")]
         public ActionResult<Produto> GetById(int id)
         {
             var produto = _context.Produtos.FirstOrDefault<Produto>(p => p.Id == id);
@@ -39,6 +39,21 @@ namespace APICatalogo.Controllers
             }
 
             return produto;
+        }
+
+        [HttpPost]
+        public ActionResult Post(Produto produto)
+        {
+
+            if (produto is null)
+            {
+                return BadRequest("A forma que o produto é enviado está inválida... Verifique e tente novamente.");
+            }
+
+            _context.Produtos.Add(produto);
+            _context.SaveChanges();
+
+            return new CreatedAtRouteResult("ObterProduto", new { id = produto.Id }, produto);
         }
     }
 }
