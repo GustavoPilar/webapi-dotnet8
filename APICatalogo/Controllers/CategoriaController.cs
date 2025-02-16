@@ -27,7 +27,7 @@ namespace APICatalogo.Controllers
             return categorias;
         }
 
-        [HttpGet("{id:int}", Name="ObterCategoria")]
+        [HttpGet("{id:int:min(1)}", Name="ObterCategoria")]
         public ActionResult<Categoria> GetById(int id)
         {
             var categoria = _context.Categorias?.AsNoTracking().FirstOrDefault<Categoria>(c => c.Id == id);
@@ -37,7 +37,7 @@ namespace APICatalogo.Controllers
             return categoria;
         }
 
-        [HttpGet("{id:int}/Produtos")]
+        [HttpGet("{id:int:min(1)}/Produtos")]
         public ActionResult<IEnumerable<Categoria>> GetProdutosByCategorias(int id)
         {
             try
@@ -63,7 +63,7 @@ namespace APICatalogo.Controllers
             return new CreatedAtRouteResult("ObterCategoria", new { id = categoria.Id }, categoria);
         }
 
-        [HttpPut("{id:int}")]
+        [HttpPut("{id:int:min(1)}")]
         public ActionResult Put(int id, Categoria categoria)
         {
             if (id != categoria.Id) return BadRequest("Id nao encontrado. Verifique e tente novamente...");
@@ -74,7 +74,7 @@ namespace APICatalogo.Controllers
             return Ok(categoria);
         }
 
-        [HttpDelete("{id:int}")]
+        [HttpDelete("{id:int:min(1)}")]
         public ActionResult Delete(int id)
         {
             var categoria = _context.Categorias?.FirstOrDefault(c => c.Id == id);
