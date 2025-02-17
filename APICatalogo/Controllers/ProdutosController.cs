@@ -17,9 +17,9 @@ namespace APICatalogo.Controllers
         }
 
         [HttpGet]
-        public ActionResult<IEnumerable<Produto>> Get()
+        public async Task<ActionResult<IEnumerable<Produto>>> Get()
         {
-            var produtos = _context.Produtos?.AsNoTracking().ToList(); // Requisições de apenas consultas não precisam ser rastreadas
+            var produtos = await _context.Produtos?.AsNoTracking().ToListAsync(); // Requisições de apenas consultas não precisam ser rastreadas
 
             if(produtos is null) return NotFound("Produtos não encontrados...");
 
@@ -27,9 +27,9 @@ namespace APICatalogo.Controllers
         }
 
         [HttpGet("{valor:alpha:minlength(5)}")]
-        public ActionResult<IEnumerable<Produto>> Get2()
+        public async Task<ActionResult<IEnumerable<Produto>>> Get2()
         {
-            var produtos = _context.Produtos?.AsNoTracking().ToList();
+            var produtos = await _context.Produtos?.AsNoTracking().ToListAsync();
 
             if (produtos is null) return NotFound("Produtos não encontrados...");
 
