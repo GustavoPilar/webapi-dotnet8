@@ -1,5 +1,6 @@
 ﻿using APICatalogo.Context;
 using APICatalogo.Models;
+using APICatalogo.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -14,6 +15,12 @@ namespace APICatalogo.Controllers
         public ProdutosController(AppDbContext context)
         {
             _context = context;
+        }
+
+        [HttpGet("saudacao/{nome}")]
+        public ActionResult<string> saldacaoFromServices([FromServices] IMeuServico service, string nome)
+        {
+            return service.saudacao(nome);
         }
 
         [HttpGet]
@@ -47,7 +54,7 @@ namespace APICatalogo.Controllers
         }
 
         [HttpPost]
-        public ActionResult Post(Produto produto)
+        public ActionResult Post([FromBody]Produto produto)
         {
 
             if (produto is null) return BadRequest("A forma que o produto é enviado está inválida... Verifique e tente novamente.");
@@ -59,7 +66,7 @@ namespace APICatalogo.Controllers
         }
 
         [HttpPut("{id:int:min(1)}")]
-        public ActionResult Put(int id, Produto produto)
+        public ActionResult Put(int id, [FromBody]Produto produto)
         {
             if (id != produto.Id) return BadRequest("O Id passado é diferente do Id do produto");
 
