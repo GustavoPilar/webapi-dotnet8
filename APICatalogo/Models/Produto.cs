@@ -10,20 +10,20 @@ public class Produto
     [Key]
     public int Id { get; set; }
 
-    [Required]
-    [StringLength(80)]
+    [Required(ErrorMessage = "O campo Nome é obrigatório")]
+    [StringLength(20, ErrorMessage = "O Nome deve ter entre 5 a 20 letras", MinimumLength = 5)]
     public string? Nome { get; set; }
 
-    [Required]
-    [StringLength(300)]
+    [Required(ErrorMessage = "O campo Descrição é obrigatório")]
+    [StringLength(10, ErrorMessage = "A Descrição deve ter no máximo {1} caracteres"]
     public string? Descricao { get; set; }
 
     [Required]
-    [Column(TypeName ="decimal(10,2)")]
+    [Range(1, 1000, ErrorMessage = "O preço deve estar entre {1} e {2}")]
     public decimal Preco { get; set; }
 
     [Required]
-    [StringLength(300)]
+    [StringLength(300, MinimumLength = 10)]
     public string? ImagemUrl { get; set; }
     public float Estoque { get; set; }
     public DateTime DataCadastro { get; set; }
