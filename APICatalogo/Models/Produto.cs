@@ -1,6 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Text.Json.Serialization;
+using APICatalogo.Validations;
 
 namespace APICatalogo.Models;
 
@@ -12,6 +13,7 @@ public class Produto
 
     [Required(ErrorMessage = "O campo Nome é obrigatório")]
     [StringLength(20, ErrorMessage = "O Nome deve ter entre 5 a 20 letras", MinimumLength = 5)]
+    [PrimeiraLetraMaiuscula]
     public string? Nome { get; set; }
 
     [Required(ErrorMessage = "O campo Descrição é obrigatório")]
